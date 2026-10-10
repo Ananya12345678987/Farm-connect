@@ -1,0 +1,166 @@
+.farmerx {
+  background: var(--c-ivory);
+  overflow: hidden;
+}
+
+.farmerx__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(2.5rem, 1.5rem + 5vw, 5rem);
+  align-items: center;
+}
+
+/* ---------- Media ---------- */
+
+.farmerx__media {
+  position: relative;
+}
+
+.farmerx__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.6;
+  /* Mirrors the hero arch, turned the other way up — the same shape language
+     without repeating the same object. */
+  border-radius: var(--r-panel) var(--r-panel) 180px 180px;
+  box-shadow: var(--e-raise);
+}
+
+.farmerx__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Slow vertical parallax driven by the section's scroll progress. */
+  transform: scale(1.14) translate3d(0, calc(var(--sy, 0.5) * -38px + 19px), 0);
+  will-change: transform;
+}
+
+.farmerx__quote {
+  position: absolute;
+  right: -1.5rem;
+  bottom: 2.5rem;
+  max-width: 19rem;
+  padding: var(--sp-5);
+  border-radius: var(--r-card);
+  border: 1px solid var(--c-line);
+  background: var(--c-paper);
+  box-shadow: var(--e-float);
+}
+
+.farmerx__quote-text {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: var(--tr-snug);
+  color: var(--c-ink);
+}
+
+.farmerx__quote-by {
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--c-line);
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+}
+
+/* ---------- Copy ---------- */
+
+.farmerx__copy {
+  min-width: 0;
+}
+
+.farmerx__title {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: var(--tr-tight);
+  max-width: 16ch;
+}
+
+.farmerx__lead {
+  margin-top: var(--sp-4);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-loose);
+  color: var(--c-ink-2);
+  max-width: 44ch;
+}
+
+.farmerx__list {
+  display: flex;
+  flex-direction: column;
+  margin: var(--sp-8) 0;
+  border-top: 1px solid var(--c-line);
+}
+
+.farmerx__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.farmerx__tick {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 999px;
+  background: var(--c-lime-wash);
+  color: #4d6c10;
+  font-size: 0.75rem;
+}
+
+.farmerx__list strong {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 560;
+  color: var(--c-ink);
+}
+
+.farmerx__list-body {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: var(--fs-xs);
+  color: var(--c-moss);
+}
+
+@media (max-width: 900px) {
+  .farmerx__inner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+  }
+  .farmerx__frame {
+    aspect-ratio: 16 / 11;
+    border-radius: var(--r-panel) var(--r-panel) 120px 120px;
+  }
+  .farmerx__quote {
+    right: 0;
+    bottom: -1.75rem;
+    max-width: 17rem;
+  }
+  .farmerx__title,
+  .farmerx__lead {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .farmerx__quote {
+    position: static;
+    max-width: none;
+    margin-top: var(--sp-5);
+    box-shadow: none;
+  }
+  .farmerx__frame img {
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .farmerx__frame img {
+    transform: scale(1.06);
+  }
+}

@@ -3,13 +3,21 @@ import SectionHeading from "../components/SectionHeading/SectionHeading";
 import ValueStatement from "../sections/ValueStatement";
 import WhyFarmConnect from "../sections/WhyFarmConnect";
 import HowItWorks from "../sections/HowItWorks";
+import FarmerSection from "../sections/FarmerSection";
+import Stats from "../sections/Stats";
+import PlatformFeatures from "../sections/PlatformFeatures";
 
-/* Placeholders for sections that arrive in the next commit. */
-const BLOCKS = [
-  { id: "for-farmers", title: "For farmers" },
-  { id: "for-buyers", title: "For buyers" },
-  { id: "get-started", title: "Get started" },
-];
+/* Placeholder for sections that arrive in the next commits. */
+function Placeholder({ id, title }) {
+  return (
+    <section id={id} className="u-page u-section" style={{ minHeight: "50vh" }}>
+      <SectionHeading
+        title={title}
+        lead="Placeholder section, replaced by the real one soon."
+      />
+    </section>
+  );
+}
 
 export default function Home() {
   return (
@@ -18,20 +26,11 @@ export default function Home() {
       <ValueStatement />
       <WhyFarmConnect />
       <HowItWorks />
-
-      {BLOCKS.map((block) => (
-        <section
-          key={block.id}
-          id={block.id}
-          className="u-page u-section"
-          style={{ minHeight: "60vh" }}
-        >
-          <SectionHeading
-            title={block.title}
-            lead="Placeholder section, replaced by the real one soon."
-          />
-        </section>
-      ))}
+      <FarmerSection />
+      <Placeholder id="for-buyers" title="For buyers" />
+      <Stats />
+      <PlatformFeatures />
+      <Placeholder id="get-started" title="Get started" />
     </>
   );
 }
