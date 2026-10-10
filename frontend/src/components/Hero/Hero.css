@@ -1,0 +1,501 @@
+/* ------------------------------------------------------------
+   Hero
+   Asymmetric: copy on a 7-column measure, stage on 5. The photo is
+   held in a tall arched frame rather than a banner, and the plant
+   breaks across its bottom-left edge so the composition has depth
+   before any transform is applied.
+   ------------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: calc(var(--nav-h) + clamp(2.5rem, 1rem + 5vw, 5.5rem));
+  padding-bottom: clamp(5rem, 3rem + 6vw, 8rem);
+  background: linear-gradient(175deg, #fdfbf6 0%, var(--c-ivory) 42%, #f5f1e6 100%);
+}
+
+.hero__contour {
+  opacity: 0.5;
+  mask-image: radial-gradient(120% 90% at 70% 40%, #000 25%, transparent 78%);
+}
+
+/* ---------- Morning light ---------- */
+
+.hero__light {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 130%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__light-wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      52% 46% at 74% 16%,
+      rgba(255, 238, 196, 0.75) 0%,
+      rgba(255, 240, 205, 0.32) 42%,
+      transparent 72%
+    ),
+    radial-gradient(
+      44% 38% at 18% 8%,
+      rgba(233, 244, 214, 0.5) 0%,
+      transparent 70%
+    );
+  animation: light-travel 26s var(--ease-in-out) infinite;
+}
+
+@keyframes light-travel {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.86; }
+  50% { transform: translate3d(-3.5%, 2%, 0) scale(1.07); opacity: 1; }
+}
+
+/* Low-angle rays: wide, very low contrast, and skewed like early light
+   across a field. Masked so they never reach the headline. */
+.hero__light-rays {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    102deg,
+    rgba(255, 244, 214, 0) 0px,
+    rgba(255, 244, 214, 0) 58px,
+    rgba(255, 240, 200, 0.42) 66px,
+    rgba(255, 244, 214, 0) 108px
+  );
+  mask-image: radial-gradient(70% 62% at 82% 6%, #000 0%, transparent 74%);
+  opacity: 0.75;
+  animation: rays-sweep 34s linear infinite;
+}
+
+@keyframes rays-sweep {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-108px, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__light-wash,
+  .hero__light-rays {
+    animation: none;
+  }
+}
+
+/* ---------- Layout ---------- */
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  align-items: center;
+  gap: clamp(2.5rem, 1rem + 5vw, 5rem);
+}
+
+/* ---------- Copy ---------- */
+
+.hero__copy {
+  max-width: 34rem;
+}
+
+.hero__eyebrow {
+  animation: hero-in 700ms var(--ease-out) backwards;
+}
+
+.hero__title {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  font-variation-settings: "wdth" 96;
+  text-wrap: balance;
+  animation: hero-in 820ms var(--ease-out) 90ms backwards;
+}
+
+.hero__lead {
+  margin-top: var(--sp-6);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-loose);
+  color: var(--c-ink-2);
+  max-width: 46ch;
+  animation: hero-in 820ms var(--ease-out) 190ms backwards;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: var(--sp-8);
+  animation: hero-in 820ms var(--ease-out) 280ms backwards;
+}
+
+.hero__proof {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--c-line);
+  animation: hero-in 820ms var(--ease-out) 380ms backwards;
+}
+
+.hero__proof-marks {
+  display: flex;
+}
+
+.hero__proof-marks span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: -9px;
+  border-radius: 999px;
+  border: 2px solid var(--c-ivory);
+  background: var(--c-forest-wash);
+  color: var(--c-forest);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.hero__proof-marks span:nth-child(2) { background: var(--c-lime-wash); color: #48660d; }
+.hero__proof-marks span:nth-child(4) { background: var(--c-sand); color: var(--c-ink-2); }
+
+.hero__proof-text {
+  font-size: var(--fs-xs);
+  color: var(--c-moss);
+}
+
+.hero__proof-text strong {
+  color: var(--c-ink);
+  font-weight: 560;
+}
+
+/* One orchestrated entrance sequence, on page load only. */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__eyebrow,
+  .hero__title,
+  .hero__lead,
+  .hero__actions,
+  .hero__proof {
+    animation: none;
+  }
+}
+
+/* ---------- Stage ---------- */
+
+.hero__stage {
+  position: relative;
+  aspect-ratio: 4 / 4.4;
+  max-height: 620px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.hero__frame {
+  position: absolute;
+  inset: 0 0 12% 14%;
+  overflow: hidden;
+  /* Arched top — a field gate, and a shape no SaaS template reaches for. */
+  border-radius: 190px 190px var(--r-panel) var(--r-panel);
+  box-shadow: var(--e-lift);
+  transform: translate3d(
+    calc(var(--px, 0) * -10px * var(--motion)),
+    calc(var(--py, 0) * -8px * var(--motion) + var(--sy, 0) * -26px),
+    0
+  );
+  transition: transform 500ms var(--ease-soft);
+  animation: frame-reveal 1100ms var(--ease-out) 120ms backwards;
+}
+
+@keyframes frame-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 42% 0);
+  }
+}
+
+.hero__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
+}
+
+.hero__frame-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      190deg,
+      rgba(255, 246, 219, 0.32) 0%,
+      transparent 38%
+    ),
+    linear-gradient(0deg, rgba(15, 35, 24, 0.42) 0%, transparent 46%);
+}
+
+.hero__plant {
+  position: absolute;
+  left: -14%;
+  bottom: 0;
+  width: 62%;
+  height: 66%;
+  z-index: 2;
+}
+
+/* ---------- Floating cards ---------- */
+
+.hero__card {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 0.95rem;
+  border-radius: 14px;
+  border: 1px solid rgba(227, 221, 206, 0.9);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--e-float);
+  transition: transform 500ms var(--ease-soft);
+}
+
+@supports (backdrop-filter: blur(4px)) {
+  .hero__card {
+    background: rgba(255, 255, 255, 0.74);
+    backdrop-filter: blur(12px) saturate(1.3);
+  }
+}
+
+.hero__card--listing {
+  top: 16%;
+  right: -6%;
+  max-width: 15rem;
+  transform: translate3d(
+    calc(var(--px, 0) * 20px * var(--motion)),
+    calc(var(--py, 0) * 14px * var(--motion) + var(--sy, 0) * 42px),
+    0
+  );
+  animation: hero-in 900ms var(--ease-out) 620ms backwards;
+}
+
+.hero__card--stat {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  left: -4%;
+  top: 9%;
+  transform: translate3d(
+    calc(var(--px, 0) * 28px * var(--motion)),
+    calc(var(--py, 0) * 20px * var(--motion) + var(--sy, 0) * 60px),
+    0
+  );
+  animation: hero-in 900ms var(--ease-out) 760ms backwards;
+}
+
+.hero__card-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--c-lime);
+  box-shadow: 0 0 0 4px var(--c-lime-wash);
+  animation: card-live 2.6s var(--ease-in-out) infinite;
+}
+
+@keyframes card-live {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(198, 242, 78, 0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(198, 242, 78, 0.08); }
+}
+
+.hero__card-title {
+  font-size: var(--fs-xs);
+  font-weight: 560;
+  color: var(--c-ink);
+}
+
+.hero__card-meta {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  margin-top: 0.1rem;
+}
+
+.hero__card-stat {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 650;
+  letter-spacing: var(--tr-tight);
+  color: var(--c-forest);
+}
+
+/* ---------- Floating objects ---------- */
+
+.hero__floater {
+  position: absolute;
+  left: var(--fx);
+  top: var(--fy);
+  z-index: 1;
+  width: 30px;
+  color: var(--c-forest-2);
+  opacity: 0.4;
+  transform: translate3d(0, 0, var(--fz));
+  animation: floater-drift var(--fdur) var(--ease-in-out) var(--fdelay) infinite;
+  pointer-events: none;
+}
+
+.hero__floater svg {
+  width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero__floater--seed { width: 22px; opacity: 0.36; }
+.hero__floater--grain { width: 26px; opacity: 0.3; }
+.hero__floater--leaf { width: 34px; color: var(--c-forest-3); opacity: 0.34; }
+
+@keyframes floater-drift {
+  0%, 100% { transform: translate3d(0, 0, var(--fz)) rotate(0deg); }
+  33% { transform: translate3d(9px, -16px, var(--fz)) rotate(7deg); }
+  66% { transform: translate3d(-6px, -28px, var(--fz)) rotate(-5deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__floater,
+  .hero__card-dot {
+    animation: none;
+  }
+  .hero__frame,
+  .hero__card {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* ---------- Scroll cue ---------- */
+
+.hero__cue {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: fit-content;
+  margin: clamp(2.5rem, 1.5rem + 3vw, 4rem) auto 0;
+  padding: 0.45rem 0.9rem 0.45rem 1.1rem;
+  border-radius: var(--r-chip);
+  font-size: var(--fs-xs);
+  color: var(--c-ink-2);
+  transition: color var(--d-fast) var(--ease-out),
+    background-color var(--d-fast) var(--ease-out);
+}
+
+.hero__cue:hover {
+  color: var(--c-ink);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.hero__cue-arrow {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--c-line-strong);
+  font-size: 0.85rem;
+  animation: cue-nudge 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes cue-nudge {
+  0%, 62%, 100% { transform: translateY(0); }
+  78% { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__cue-arrow { animation: none; }
+}
+
+/* ============================================================
+   Responsive — the stage is re-composed, not shrunk.
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .hero__card--listing { right: -2%; }
+  .hero__card--stat { left: -1%; }
+}
+
+@media (max-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: clamp(3rem, 2rem + 4vw, 4rem);
+  }
+
+  .hero__copy {
+    max-width: 38rem;
+  }
+
+  /* Stage becomes a wide landscape band with the plant beside the photo
+     rather than a tall arch with it in front. */
+  .hero__stage {
+    aspect-ratio: 16 / 11;
+    max-height: none;
+  }
+
+  .hero__frame {
+    inset: 0 0 0 26%;
+    border-radius: 150px 150px var(--r-card) var(--r-card);
+  }
+
+  .hero__plant {
+    left: -4%;
+    width: 46%;
+    height: 82%;
+  }
+
+  .hero__card--listing { top: 6%; right: 2%; }
+  .hero__card--stat { display: none; }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding-bottom: 3.5rem;
+  }
+
+  .hero__stage {
+    aspect-ratio: 5 / 4;
+  }
+
+  .hero__frame {
+    inset: 0 0 0 30%;
+    border-radius: 110px 110px var(--r-card) var(--r-card);
+  }
+
+  .hero__plant {
+    left: -8%;
+    width: 50%;
+  }
+
+  .hero__card {
+    padding: 0.55rem 0.75rem;
+  }
+
+  .hero__card--listing {
+    top: auto;
+    bottom: -4%;
+    right: 0;
+    max-width: 13.5rem;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+}

@@ -1,5 +1,5 @@
+import Hero from "../components/Hero/Hero";
 import SectionHeading from "../components/SectionHeading/SectionHeading";
-import Button from "../components/Button/Button";
 
 const BLOCKS = [
   { id: "how-it-works", title: "How it works" },
@@ -11,9 +11,9 @@ const BLOCKS = [
 export default function Home() {
   return (
     <>
+    <Hero />
 
-
-      <section
+      {/* <section
         className="u-page"
         style={{ paddingTop: "calc(var(--nav-h) + 4rem)", minHeight: "90vh" }}
       >
@@ -24,7 +24,7 @@ export default function Home() {
         <Button to="/#how-it-works" size="lg">
           See how it works
         </Button>
-      </section>
+      </section> */}
 
       {BLOCKS.map((block) => (
         <section
