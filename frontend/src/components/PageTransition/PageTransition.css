@@ -1,0 +1,22 @@
+.page-transition {
+  animation: page-in 180ms var(--ease-out);
+}
+
+/* main is focused programmatically on route change; it should not draw a
+   focus ring for that, only for real keyboard interaction. */
+.page-transition:focus {
+  outline: none;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 4px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}

@@ -1,17 +1,33 @@
-import { BrowserRouter } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
+import { Suspense } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import SiteLayout from "./layouts/SiteLayout";
+import ScrollManager from "./components/PageTransition/ScrollManager";
+import RouteFallback from "./components/RouteFallback/RouteFallback";
+
+import Home from "./pages/Home";
+import "./App.css";
+
+/**
+ * Routing.
+ *
+ * Home is imported directly because it is the entry point for almost every
+ * visit. Later pages are loaded lazily, so the first load does not carry
+ * dashboards and forms the visitor may never open.
+ */
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <main id="main" className="u-page u-section" style={{ minHeight: "150vh", paddingTop: 140 }}>
-        <h1 style={{ fontSize: "var(--fs-h1)", color: "var(--c-forest)" }}>
-          Scroll down
-        </h1>
-      </main>
-      <Footer />
+      <ScrollManager />
+
+      <Suspense fallback={<RouteFallback />}>
+        <Routes>
+          {/* Marketing */}
+          <Route element={<SiteLayout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

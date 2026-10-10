@@ -1,0 +1,11 @@
+/* App shell. Layout lives in components; this file stays intentionally thin. */
+
+.app-shell {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1 1 auto;
+}
