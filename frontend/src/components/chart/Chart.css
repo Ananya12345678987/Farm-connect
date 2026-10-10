@@ -1,0 +1,246 @@
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.chart__plot {
+  position: relative;
+  height: 220px;
+}
+
+.chart__grid {
+  position: absolute;
+  inset: 0 0 26px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chart__grid span {
+  height: 1px;
+  background: var(--c-line);
+}
+
+/* ---------- Bars ---------- */
+
+.chart__bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(0.4rem, 1.4vw, 1rem);
+}
+
+.chart__col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.chart__bar-track {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.chart__bar {
+  position: relative;
+  width: 100%;
+  height: var(--h);
+  border-radius: 7px 7px 2px 2px;
+  background: var(--c-clay);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 720ms var(--ease-out) var(--d), background-color var(--d-base) var(--ease-out);
+}
+
+.chart__plot--bars[data-revealed="true"] .chart__bar {
+  transform: scaleY(1);
+}
+
+.chart__bar.is-current {
+  background: var(--c-forest);
+}
+
+.chart__col:hover .chart__bar {
+  background: var(--c-forest-3);
+}
+
+.chart__col:hover .chart__bar.is-current {
+  background: var(--c-forest-2);
+}
+
+.chart__bar-value {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--fs-2xs);
+  font-weight: 560;
+  color: var(--c-ink-2);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--d-fast) var(--ease-out);
+}
+
+.chart__col:hover .chart__bar-value,
+.chart__bar.is-current .chart__bar-value {
+  opacity: 1;
+}
+
+/* ---------- Line ---------- */
+
+.chart__svg {
+  width: 100%;
+  height: calc(100% - 26px);
+  overflow: visible;
+}
+
+.chart__line {
+  fill: none;
+  stroke: var(--c-forest);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  transition: stroke-dashoffset 1400ms var(--ease-out);
+}
+
+.chart__area {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out) 380ms;
+}
+
+.chart__dot {
+  fill: var(--c-paper);
+  stroke: var(--c-forest);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+  transition: opacity var(--d-base) var(--ease-out) var(--d);
+}
+
+.chart__dot.is-current {
+  fill: var(--c-lime);
+  stroke: var(--c-forest);
+}
+
+.chart__plot[data-revealed="true"] .chart__line { stroke-dashoffset: 0; }
+.chart__plot[data-revealed="true"] .chart__area { opacity: 1; }
+.chart__plot[data-revealed="true"] .chart__dot { opacity: 1; }
+
+.chart__ticks {
+  display: flex;
+  height: 26px;
+  align-items: flex-end;
+}
+
+.chart__ticks .chart__tick {
+  flex: 1;
+  text-align: center;
+}
+
+.chart__tick {
+  padding-top: 0.5rem;
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart__caption {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+}
+
+/* ---------- Split bar ---------- */
+
+.split {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.split__bar {
+  display: flex;
+  height: 14px;
+  border-radius: var(--r-chip);
+  overflow: hidden;
+  background: var(--c-sand);
+}
+
+.split__seg {
+  width: var(--w);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 760ms var(--ease-out) var(--d);
+}
+
+.split__bar[data-revealed="true"] .split__seg {
+  transform: scaleX(1);
+}
+
+.split__seg--forest { background: var(--c-forest); }
+.split__seg--lime { background: var(--c-lime); }
+.split__seg--amber { background: var(--c-amber); }
+.split__seg--clay { background: var(--c-line-strong); }
+
+.split__legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.split__legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--fs-xs);
+}
+
+.split__key {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+}
+
+.split__key--forest { background: var(--c-forest); }
+.split__key--lime { background: var(--c-lime); }
+.split__key--amber { background: var(--c-amber); }
+.split__key--clay { background: var(--c-line-strong); }
+
+.split__label {
+  color: var(--c-ink-2);
+}
+
+.split__value {
+  margin-left: auto;
+  font-weight: 560;
+  color: var(--c-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart__bar,
+  .split__seg {
+    transform: none;
+    transition: none;
+  }
+  .chart__line {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  .chart__area,
+  .chart__dot {
+    opacity: 1;
+    transition: none;
+  }
+}
