@@ -1,0 +1,379 @@
+.db {
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr);
+  min-height: 100dvh;
+  background: var(--c-ivory);
+}
+
+/* ---------- Sidebar ---------- */
+
+.db__side {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-6) var(--sp-4);
+  border-right: 1px solid var(--c-line);
+  background: var(--c-paper);
+}
+
+.db__side-head {
+  padding: 0 0.5rem var(--sp-8);
+}
+
+.db__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.db__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--c-ink-2);
+  text-align: left;
+  transition: background-color var(--d-fast) var(--ease-out),
+    color var(--d-fast) var(--ease-out);
+}
+
+.db__nav-item svg {
+  flex: none;
+  font-size: 1.05rem;
+  color: var(--c-moss);
+  transition: color var(--d-fast) var(--ease-out);
+}
+
+.db__nav-item:hover {
+  background: var(--c-ivory);
+  color: var(--c-ink);
+}
+
+.db__nav-item.is-active {
+  background: var(--c-forest-wash);
+  color: var(--c-forest);
+  font-weight: 560;
+}
+
+.db__nav-item.is-active svg {
+  color: var(--c-forest);
+}
+
+.db__back {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0.7rem 0.75rem;
+  border-top: 1px solid var(--c-line);
+  font-size: var(--fs-xs);
+  color: var(--c-moss);
+  transition: color var(--d-fast) var(--ease-out);
+}
+
+.db__back:hover {
+  color: var(--c-ink);
+}
+
+/* ---------- Top bar ---------- */
+
+.db__body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.db__top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--gutter);
+  border-bottom: 1px solid var(--c-line);
+  background: rgba(250, 247, 240, 0.9);
+}
+
+@supports (backdrop-filter: blur(4px)) {
+  .db__top {
+    background: rgba(250, 247, 240, 0.78);
+    backdrop-filter: blur(12px);
+  }
+}
+
+.db__top-title h1 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: var(--tr-snug);
+}
+
+.db__top-title p {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  margin-top: 0.1rem;
+}
+
+.db__top-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.db__search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.db__search svg {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--c-moss-2);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.db__search input {
+  width: 16rem;
+  height: 40px;
+  padding: 0 0.9rem 0 2.25rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-chip);
+  background: var(--c-paper);
+  font-size: var(--fs-xs);
+  transition: border-color var(--d-fast) var(--ease-out),
+    box-shadow var(--d-fast) var(--ease-out);
+}
+
+.db__search input:focus {
+  outline: none;
+  border-color: var(--c-forest);
+  box-shadow: 0 0 0 3px rgba(15, 59, 42, 0.12);
+}
+
+/* ---------- Notifications ---------- */
+
+.db__bell-wrap {
+  position: relative;
+}
+
+.db__bell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-paper);
+  color: var(--c-ink-2);
+  font-size: 1rem;
+  transition: color var(--d-fast) var(--ease-out),
+    background-color var(--d-fast) var(--ease-out);
+}
+
+.db__bell:hover {
+  color: var(--c-ink);
+  background: var(--c-sand);
+}
+
+.db__bell-dot {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--c-lime);
+  border: 1.5px solid var(--c-paper);
+}
+
+.db__panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 30;
+  width: min(22rem, calc(100vw - 2rem));
+  padding: var(--sp-4);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  background: var(--c-paper);
+  box-shadow: var(--e-lift);
+  animation: db-panel 180ms var(--ease-out);
+}
+
+@keyframes db-panel {
+  from { opacity: 0; transform: translateY(-6px); }
+}
+
+.db__panel-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-2xs);
+  font-weight: 560;
+  letter-spacing: var(--tr-wide);
+  color: var(--c-moss);
+  margin-bottom: var(--sp-3);
+}
+
+.db__panel-list li {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.db__panel-list li:last-child {
+  border-bottom: none;
+}
+
+.db__panel-list p {
+  font-size: var(--fs-xs);
+  color: var(--c-ink);
+}
+
+.db__panel-list span {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+}
+
+/* ---------- User ---------- */
+
+.db__user {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-left: 0.6rem;
+  border-left: 1px solid var(--c-line);
+}
+
+.db__avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--c-forest);
+  color: var(--c-lime);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+}
+
+.db__user-name {
+  font-size: var(--fs-xs);
+  font-weight: 540;
+}
+
+/* ---------- Tabs (small screens) ---------- */
+
+.db__tabs {
+  display: none;
+  gap: 0.35rem;
+  padding: 0.7rem var(--gutter);
+  border-bottom: 1px solid var(--c-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.db__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.db__tab {
+  flex: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--r-chip);
+  border: 1px solid var(--c-line-strong);
+  font-size: var(--fs-xs);
+  color: var(--c-ink-2);
+  white-space: nowrap;
+}
+
+.db__tab.is-active {
+  background: var(--c-forest);
+  border-color: var(--c-forest);
+  color: var(--c-ivory);
+}
+
+/* ---------- Main ---------- */
+
+.db__main {
+  flex: 1;
+  padding: var(--sp-8) var(--gutter) var(--sp-16);
+}
+
+.db__main:focus {
+  outline: none;
+}
+
+/* Brand block that stands in for the sidebar on small screens. */
+.db__brand {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+.db__brand-back {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--c-line-strong);
+  color: var(--c-ink-2);
+  background: var(--c-paper);
+}
+
+.db__brand-back:hover {
+  color: var(--c-ink);
+  background: var(--c-sand);
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (max-width: 1080px) {
+  .db {
+    grid-template-columns: 1fr;
+  }
+  .db__side {
+    display: none;
+  }
+  .db__tabs {
+    display: flex;
+  }
+  .db__top {
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .db__brand {
+    display: flex;
+  }
+  .db__top-title {
+    order: 1;
+  }
+  .db__top-tools {
+    order: 2;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 720px) {
+  .db__search {
+    display: none;
+  }
+  .db__user-name {
+    display: none;
+  }
+  .db__top {
+    padding-block: var(--sp-4);
+  }
+}
