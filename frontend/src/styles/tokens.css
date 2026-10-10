@@ -1,0 +1,121 @@
+/* ============================================================
+   FarmConnect — Design tokens
+   Warm paper, surveyed ground, deep green, one lime signal.
+   ============================================================ */
+
+:root {
+  /* ---------- Surface ---------- */
+  --c-ivory: #faf7f0;
+  --c-paper: #ffffff;
+  --c-sand: #f1ece1;
+  --c-clay: #e7e0d1;
+  --c-line: #e3ddce;
+  --c-line-strong: #d2c9b4;
+
+  /* ---------- Ink ---------- */
+  --c-ink: #171a14;
+  --c-ink-2: #444a3e;
+  --c-moss: #6e7566;
+  --c-moss-2: #949c8b;
+
+  /* ---------- Brand ---------- */
+  --c-forest: #0f3b2a;
+  --c-forest-2: #17543c;
+  --c-forest-3: #2a7a5a;
+  --c-forest-wash: #eef3ef;
+  --c-lime: #c6f24e;
+  --c-lime-2: #b4e336;
+  --c-lime-wash: #f2fbd9;
+
+  /* ---------- Signal ---------- */
+  --c-amber: #a97613;
+  --c-amber-wash: #fbf3e0;
+  --c-rust: #a1442a;
+  --c-rust-wash: #fbeeea;
+
+  /* ---------- Type ---------- */
+  --font-display: "Bricolage Grotesque", "Inter", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+
+  --fs-display: clamp(2.75rem, 1.15rem + 6.6vw, 5.75rem);
+  --fs-h1: clamp(2.125rem, 1.35rem + 3vw, 3.5rem);
+  --fs-h2: clamp(1.75rem, 1.28rem + 1.85vw, 2.5rem);
+  --fs-h3: clamp(1.1875rem, 1.06rem + 0.5vw, 1.4375rem);
+  --fs-lead: clamp(1.0625rem, 1.01rem + 0.28vw, 1.1875rem);
+  --fs-body: 1rem;
+  --fs-sm: 0.9375rem;
+  --fs-xs: 0.8125rem;
+  --fs-2xs: 0.75rem;
+
+  --lh-tight: 1.02;
+  --lh-snug: 1.18;
+  --lh-normal: 1.45;
+  --lh-loose: 1.65;
+
+  --tr-tight: -0.035em;
+  --tr-snug: -0.018em;
+  --tr-normal: -0.006em;
+  --tr-wide: 0.02em;
+
+  /* ---------- Space (4px base) ---------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
+  --sp-section: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+
+  /* ---------- Layout ---------- */
+  --w-page: 1240px;
+  --w-narrow: 760px;
+  --w-prose: 64ch;
+  --gutter: clamp(1.25rem, 0.6rem + 2.4vw, 2.75rem);
+  --nav-h: 68px;
+
+  /* ---------- Radius ---------- */
+  --r-chip: 999px;
+  --r-input: 10px;
+  --r-card: 16px;
+  --r-panel: 24px;
+  --r-stage: 32px;
+
+  /* ---------- Elevation ---------- */
+  --e-hairline: 0 0 0 1px var(--c-line);
+  --e-raise: 0 1px 2px rgba(23, 26, 20, 0.04),
+    0 6px 16px -8px rgba(23, 26, 20, 0.12);
+  --e-float: 0 2px 4px rgba(23, 26, 20, 0.04),
+    0 14px 34px -12px rgba(23, 26, 20, 0.18);
+  --e-lift: 0 4px 8px rgba(23, 26, 20, 0.05),
+    0 24px 48px -16px rgba(23, 26, 20, 0.2);
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-soft: cubic-bezier(0.33, 0.8, 0.25, 1);
+  --d-fast: 160ms;
+  --d-base: 280ms;
+  --d-slow: 620ms;
+  --d-reveal: 780ms;
+  --motion: 1;
+
+  --focus-ring: 0 0 0 2px var(--c-ivory), 0 0 0 4px var(--c-forest);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0;
+    --d-fast: 1ms;
+    --d-base: 1ms;
+    --d-slow: 1ms;
+    --d-reveal: 1ms;
+  }
+}
