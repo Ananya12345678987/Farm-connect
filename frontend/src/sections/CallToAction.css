@@ -1,0 +1,67 @@
+.cta {
+  padding-block: var(--sp-section);
+  background: var(--c-ivory);
+}
+
+.cta__panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  padding: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+  border-radius: var(--r-stage);
+  background: var(--c-ink);
+  color: var(--c-ivory);
+}
+
+.cta__copy {
+  flex: 1 1 22rem;
+  min-width: 0;
+}
+
+.cta__title {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: var(--tr-tight);
+  color: var(--c-ivory);
+  max-width: 18ch;
+}
+
+.cta__lead {
+  margin-top: var(--sp-4);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-loose);
+  color: rgba(250, 247, 240, 0.68);
+  max-width: 42ch;
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.cta__ghost {
+  border-color: rgba(250, 247, 240, 0.28);
+  color: var(--c-ivory);
+}
+
+.cta__ghost:hover {
+  background: rgba(250, 247, 240, 0.08);
+  border-color: rgba(250, 247, 240, 0.5);
+  color: var(--c-ivory);
+}
+
+.cta__panel .btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--c-ink), 0 0 0 4px var(--c-lime);
+}
+
+@media (max-width: 720px) {
+  .cta__actions {
+    width: 100%;
+  }
+  .cta__actions .btn {
+    flex: 1 1 100%;
+  }
+}

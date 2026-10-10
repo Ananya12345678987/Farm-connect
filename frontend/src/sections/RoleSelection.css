@@ -1,0 +1,42 @@
+.roles {
+  background: var(--c-sand);
+}
+
+.roles__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-5);
+}
+
+.roles__grid > * {
+  display: flex;
+  min-width: 0;
+}
+
+.roles__grid .role {
+  width: 100%;
+}
+
+.roles__note {
+  margin-top: var(--sp-8);
+  font-size: var(--fs-sm);
+  color: var(--c-ink-2);
+}
+
+.roles__link {
+  font-weight: 560;
+  color: var(--c-forest);
+  border-bottom: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.roles__link:hover {
+  color: var(--c-ink);
+}
+
+@media (max-width: 900px) {
+  .roles__grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+}

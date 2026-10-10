@@ -1,0 +1,173 @@
+.role {
+  position: relative;
+  border-radius: var(--r-panel);
+  background: var(--c-paper);
+  border: 1px solid var(--c-line);
+  transform-style: preserve-3d;
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transition: transform 320ms var(--ease-soft),
+    border-color var(--d-base) var(--ease-out),
+    box-shadow var(--d-base) var(--ease-out);
+}
+
+.role[data-tilt]:hover {
+  border-color: var(--c-line-strong);
+  box-shadow: var(--e-lift);
+}
+
+.role__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--sp-6) var(--sp-6) var(--sp-5);
+}
+
+/* ---------- Mark ---------- */
+
+.role__mark {
+  display: block;
+  width: 88px;
+  margin-bottom: var(--sp-6);
+  color: var(--c-forest);
+}
+
+.role__mark svg {
+  width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.role__mark .rolemark__rows {
+  opacity: 0.4;
+  stroke-width: 1.6;
+}
+
+.role__mark .rolemark__pin,
+.role__mark .rolemark__node--end {
+  fill: var(--c-lime);
+  stroke: var(--c-forest);
+  stroke-width: 1.6;
+}
+
+.role__mark .rolemark__node {
+  fill: var(--c-paper);
+}
+
+.role__mark .rolemark__route {
+  stroke-dasharray: 5 6;
+  stroke-width: 1.8;
+  opacity: 0.6;
+}
+
+.role__mark .rolemark__ledger {
+  opacity: 0.5;
+  stroke-width: 1.7;
+}
+
+.role__mark .rolemark__check circle {
+  fill: var(--c-lime-wash);
+  stroke-width: 1.6;
+}
+
+/* On hover each mark does the one thing that role does. */
+.role__mark .rolemark__crop,
+.role__mark .rolemark__crate,
+.role__mark .rolemark__check {
+  transform-origin: center;
+  transition: transform 420ms var(--ease-out);
+}
+
+.role[data-tilt]:hover .rolemark__crop { transform: translateY(-3px); }
+.role[data-tilt]:hover .rolemark__crate { transform: translateX(4px); }
+.role[data-tilt]:hover .rolemark__check { transform: scale(1.08); }
+
+.role[data-tilt]:hover .rolemark__route {
+  animation: role-route 900ms linear infinite;
+}
+
+@keyframes role-route {
+  to { stroke-dashoffset: -22; }
+}
+
+/* ---------- Copy ---------- */
+
+.role__tagline {
+  font-size: var(--fs-2xs);
+  font-weight: 540;
+  color: var(--c-moss);
+  letter-spacing: var(--tr-wide);
+}
+
+.role__title {
+  margin-top: 0.3rem;
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+.role__link {
+  display: inline-block;
+  border-radius: 6px;
+}
+
+/* Whole card is clickable, but only the title is in the tab order. */
+.role__hit {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-panel);
+}
+
+.role__link:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.role__desc {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-loose);
+  color: var(--c-ink-2);
+}
+
+.role__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--c-line);
+  font-size: var(--fs-xs);
+  font-weight: 560;
+  color: var(--c-forest);
+}
+
+.role__cta svg {
+  transition: transform var(--d-base) var(--ease-out);
+}
+
+.role:hover .role__cta svg {
+  transform: translate3d(2px, -2px, 0);
+}
+
+/* ---------- Accents ---------- */
+
+.role--lime .role__cta { color: #4d6c10; }
+.role--lime .role__mark { color: var(--c-forest-2); }
+
+.role--ink .role__mark { color: var(--c-ink-2); }
+.role--ink .role__cta { color: var(--c-ink); }
+.role--ink .role__mark .rolemark__pin,
+.role--ink .role__mark .rolemark__check circle {
+  fill: var(--c-sand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .role {
+    transform: none;
+  }
+  .role[data-tilt]:hover .rolemark__route {
+    animation: none;
+  }
+}

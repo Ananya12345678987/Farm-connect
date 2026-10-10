@@ -1,26 +1,18 @@
 import Hero from "../components/Hero/Hero";
-import SectionHeading from "../components/SectionHeading/SectionHeading";
 import ValueStatement from "../sections/ValueStatement";
 import WhyFarmConnect from "../sections/WhyFarmConnect";
 import HowItWorks from "../sections/HowItWorks";
 import FarmerSection from "../sections/FarmerSection";
+import BuyerSection from "../sections/BuyerSection";
 import Stats from "../sections/Stats";
 import PlatformFeatures from "../sections/PlatformFeatures";
-import BuyerSection from "../sections/BuyerSection";
+import RoleSelection from "../sections/RoleSelection";
+import CallToAction from "../sections/CallToAction";
 
-
-/* Placeholder for sections that arrive in the next commits. */
-function Placeholder({ id, title }) {
-  return (
-    <section id={id} className="u-page u-section" style={{ minHeight: "50vh" }}>
-      <SectionHeading
-        title={title}
-        lead="Placeholder section, replaced by the real one soon."
-      />
-    </section>
-  );
-}
-
+/**
+ * Home is composition only — every section owns its own content and layout,
+ * so this file stays readable and sections can be reordered or reused.
+ */
 export default function Home() {
   return (
     <>
@@ -32,7 +24,8 @@ export default function Home() {
       <BuyerSection />
       <Stats />
       <PlatformFeatures />
-      <Placeholder id="get-started" title="Get started" />
+      <RoleSelection />
+      <CallToAction />
     </>
   );
 }
