@@ -1,43 +1,9 @@
-/**
- * TEMPORARY stand-in for the real auth service.
- *
- * It has the same function names the real one will have, so pages that call
- * `authApi.login(...)` do not change when we swap this file for the version
- * that talks to the backend.
- *
- * Fake rule so every dashboard can be reached while testing: an email that
- * contains "farmer" signs in as a farmer, "admin" as an admin, anything else
- * as a buyer.
- */
+import { get, post, patch } from "./api";
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export async function login({ email }) {
-  await wait(700);
-
-  const lower = email.toLowerCase();
-  const role = lower.includes("farmer")
-    ? "FARMER"
-    : lower.includes("admin")
-      ? "ADMIN"
-      : "BUYER";
-
-  return { user: { email, role } };
-} 
-
-
-
-export async function registerFarmer(values) {
-  await wait(700);
-  return { user: { email: values.email, role: "FARMER" } };
-}
-
-export async function registerBuyer(values) {
-  await wait(700);
-  return { user: { email: values.email, role: "BUYER" } };
-}
-
-export async function registerAdmin(values) {
-  await wait(700);
-  return { user: { email: values.email, role: "ADMIN" } };
-}
+export const registerFarmer = (values) => post("/auth/register/farmer", values);
+export const registerBuyer = (values) => post("/auth/register/buyer", values);
+export const registerAdmin = (values) => post("/auth/register/admin", values);
+export const login = (values) => post("/auth/login", values);
+export const logout = () => post("/auth/logout");
+export const me = () => get("/auth/me");
+export const changePassword = (values) => patch("/auth/password", values);
