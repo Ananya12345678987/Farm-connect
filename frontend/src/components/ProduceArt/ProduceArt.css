@@ -1,0 +1,17 @@
+.produce-art {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.produce-art svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* The silhouette drifts slightly on card hover — the same gesture a photo
+   would get from a gentle zoom, so photo and generated art behave alike. */
+.produce-art__shape {
+  transform-origin: 150px 110px;
+  transition: transform var(--d-slow) var(--ease-out);
+}

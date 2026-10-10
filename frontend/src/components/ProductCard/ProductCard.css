@@ -1,0 +1,164 @@
+.prod {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  background: var(--c-paper);
+  overflow: hidden;
+  transition: transform var(--d-base) var(--ease-out),
+    box-shadow var(--d-base) var(--ease-out),
+    border-color var(--d-base) var(--ease-out);
+}
+
+.prod:hover {
+  transform: translate3d(0, calc(-3px * var(--motion)), 0);
+  border-color: var(--c-line-strong);
+  box-shadow: var(--e-raise);
+}
+
+/* ---------- Media ---------- */
+
+.prod__media {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  background: var(--c-sand);
+}
+
+.prod--tall .prod__media {
+  aspect-ratio: 4 / 3.6;
+}
+
+.prod__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--d-slow) var(--ease-out);
+}
+
+.prod:hover .prod__media img {
+  transform: scale(1.045);
+}
+
+.prod:hover .produce-art__shape {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.prod__badge {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.65rem;
+  background: rgba(242, 251, 217, 0.94);
+}
+
+.prod__save {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--c-ink-2);
+  font-size: 1rem;
+  /* Always present, never hover-revealed — a control you cannot find on a
+     touch screen is not a control. */
+  transition: background-color var(--d-fast) var(--ease-out),
+    color var(--d-fast) var(--ease-out),
+    transform var(--d-fast) var(--ease-out);
+}
+
+.prod__save:hover {
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+
+.prod__save:active {
+  transform: scale(0.92);
+}
+
+.prod__save[aria-pressed="true"] {
+  color: var(--c-rust);
+}
+
+.prod__save[aria-pressed="true"] svg {
+  fill: currentColor;
+}
+
+/* ---------- Body ---------- */
+
+.prod__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--sp-5);
+}
+
+.prod__grower {
+  font-size: var(--fs-2xs);
+  font-weight: 540;
+  color: var(--c-forest);
+  letter-spacing: var(--tr-wide);
+}
+
+.prod__name {
+  margin-top: 0.2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: var(--tr-snug);
+}
+
+.prod__where {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+}
+
+.prod__where svg {
+  flex: none;
+  font-size: 0.85rem;
+}
+
+.prod__note {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-2xs);
+  line-height: var(--lh-loose);
+  color: var(--c-ink-2);
+}
+
+.prod__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: auto;
+  padding-top: var(--sp-5);
+}
+
+.prod__price {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 650;
+  letter-spacing: var(--tr-snug);
+  color: var(--c-ink);
+}
+
+.prod__stock {
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  color: var(--c-forest);
+}
+
+.prod__harvest {
+  margin-top: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--c-line);
+  font-size: var(--fs-2xs);
+  color: var(--c-moss-2);
+}

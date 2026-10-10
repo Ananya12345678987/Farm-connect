@@ -6,6 +6,8 @@ import HowItWorks from "../sections/HowItWorks";
 import FarmerSection from "../sections/FarmerSection";
 import Stats from "../sections/Stats";
 import PlatformFeatures from "../sections/PlatformFeatures";
+import BuyerSection from "../sections/BuyerSection";
+
 
 /* Placeholder for sections that arrive in the next commits. */
 function Placeholder({ id, title }) {
@@ -27,7 +29,7 @@ export default function Home() {
       <WhyFarmConnect />
       <HowItWorks />
       <FarmerSection />
-      <Placeholder id="for-buyers" title="For buyers" />
+      <BuyerSection />
       <Stats />
       <PlatformFeatures />
       <Placeholder id="get-started" title="Get started" />
