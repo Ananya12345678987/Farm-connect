@@ -1,5 +1,3 @@
-import ContourField from "../components/ContourField/ContourField";
-import PlantScene from "../components/Hero/PlantScene";
 import SectionHeading from "../components/SectionHeading/SectionHeading";
 import Button from "../components/Button/Button";
 
