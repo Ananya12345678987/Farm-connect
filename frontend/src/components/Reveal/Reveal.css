@@ -1,0 +1,46 @@
+.reveal {
+  transition-property: opacity, transform, clip-path;
+  transition-duration: var(--d-reveal);
+  transition-timing-function: var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal[data-revealed="true"] {
+  will-change: auto;
+}
+
+/* Movement is kept to 14px. Anything larger reads as a slideshow. */
+.reveal--up[data-revealed="false"] {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+
+.reveal--up[data-revealed="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal--fade[data-revealed="false"] { opacity: 0; }
+.reveal--fade[data-revealed="true"] { opacity: 1; }
+
+/* For photographs: the frame stays put and the image is uncovered. */
+.reveal--mask[data-revealed="false"] {
+  opacity: 0;
+  clip-path: inset(0 0 26% 0 round var(--r-panel));
+}
+
+.reveal--mask[data-revealed="true"] {
+  opacity: 1;
+  clip-path: inset(0 0 0 0 round var(--r-panel));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-revealed="false"] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,153 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.field__label {
+  font-size: var(--fs-xs);
+  font-weight: 560;
+  color: var(--c-ink-2);
+  letter-spacing: var(--tr-normal);
+}
+
+.field__optional {
+  color: var(--c-moss-2);
+  font-weight: 450;
+}
+
+.field__control {
+  position: relative;
+  display: flex;
+}
+
+.field__input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--r-input);
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-size: var(--fs-sm);
+  transition: border-color var(--d-fast) var(--ease-out),
+    box-shadow var(--d-fast) var(--ease-out),
+    background-color var(--d-fast) var(--ease-out);
+}
+
+textarea.field__input {
+  min-height: auto;
+  resize: vertical;
+  line-height: var(--lh-normal);
+}
+
+select.field__input {
+  appearance: none;
+  cursor: pointer;
+  /* Chevron drawn in the background so no extra element is needed. */
+  background-image: linear-gradient(45deg, transparent 50%, var(--c-moss) 50%),
+    linear-gradient(135deg, var(--c-moss) 50%, transparent 50%);
+  background-position: calc(100% - 19px) calc(50% + 1px),
+    calc(100% - 14px) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2.4rem;
+}
+
+.field__input::placeholder {
+  color: var(--c-moss-2);
+}
+
+.field__input:hover {
+  border-color: var(--c-moss-2);
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--c-forest);
+  box-shadow: 0 0 0 3px rgba(15, 59, 42, 0.13);
+}
+
+.field__input:focus-visible {
+  box-shadow: 0 0 0 3px rgba(15, 59, 42, 0.13);
+}
+
+.field__input:disabled {
+  background: var(--c-sand);
+  color: var(--c-moss);
+  cursor: not-allowed;
+}
+
+/* Password reveal */
+
+.field__toggle {
+  position: absolute;
+  inset-inline-end: 4px;
+  inset-block: 4px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  border-radius: 8px;
+  color: var(--c-moss);
+  font-size: 1.05rem;
+  transition: color var(--d-fast) var(--ease-out),
+    background-color var(--d-fast) var(--ease-out);
+}
+
+.field__toggle:hover {
+  color: var(--c-ink);
+  background: var(--c-sand);
+}
+
+.field:has(.field__toggle) .field__input {
+  padding-right: 3rem;
+}
+
+/* Hint and error */
+
+.field__hint {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  line-height: var(--lh-normal);
+}
+
+.field__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  color: var(--c-rust);
+  line-height: var(--lh-normal);
+}
+
+.field__error svg {
+  flex: none;
+  margin-top: 0.12em;
+  font-size: 0.95rem;
+}
+
+.field--invalid .field__input {
+  border-color: #cf8d79;
+  background: #fffaf9;
+}
+
+.field--invalid .field__input:focus {
+  border-color: var(--c-rust);
+  box-shadow: 0 0 0 3px rgba(161, 68, 42, 0.13);
+}
+
+/* Row helper used by the auth forms */
+
+.field-row {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 560px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}

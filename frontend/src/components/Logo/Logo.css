@@ -1,0 +1,43 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 650;
+  letter-spacing: var(--tr-snug);
+  color: var(--c-ink);
+  border-radius: 8px;
+}
+
+.logo__mark {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--c-forest);
+  flex: none;
+}
+
+.logo__mark svg { width: 22px; height: 22px; }
+.logo__stem { stroke: var(--c-ivory); }
+
+.logo__leaf {
+  fill: var(--c-lime);
+  transform-origin: 14px 14px;
+  transition: transform var(--d-base) var(--ease-out);
+}
+
+.logo:hover .logo__leaf--left { transform: rotate(calc(-6deg * var(--motion))); }
+.logo:hover .logo__leaf--right { transform: rotate(calc(6deg * var(--motion))); }
+
+.logo__word-accent { color: var(--c-forest); }
+
+.logo--invert { color: var(--c-ivory); }
+.logo--invert .logo__mark { background: rgba(250, 247, 240, 0.12); }
+.logo--invert .logo__word-accent { color: var(--c-lime); }
+
+.logo__word {
+  white-space: nowrap;
+}

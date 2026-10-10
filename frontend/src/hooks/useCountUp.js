@@ -3,19 +3,14 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Counts from 0 to `target` once `active` turns true, and never again.
  * Uses rAF with an ease-out curve so the number settles rather than stops.
+ * With reduced motion it simply returns the final number.
  */
 export default function useCountUp(target, { active, duration = 1600, reduced }) {
-  const [value, setValue] = useState(reduced ? target : 0);
+  const [value, setValue] = useState(0);
   const done = useRef(false);
 
   useEffect(() => {
-    if (!active || done.current) return undefined;
-
-    if (reduced) {
-      done.current = true;
-      setValue(target);
-      return undefined;
-    }
+    if (reduced || !active || done.current) return undefined;
 
     done.current = true;
     let frame = 0;
@@ -32,5 +27,5 @@ export default function useCountUp(target, { active, duration = 1600, reduced })
     return () => cancelAnimationFrame(frame);
   }, [active, target, duration, reduced]);
 
-  return value;
+  return reduced ? target : value;
 }

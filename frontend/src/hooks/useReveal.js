@@ -12,25 +12,22 @@ export default function useReveal({
   disabled = false,
 } = {}) {
   const ref = useRef(null);
-  const [revealed, setRevealed] = useState(disabled);
+
+  // Browsers without IntersectionObserver start out revealed, so nothing
+  // stays hidden. Deciding it here (not in the effect) avoids an extra render.
+  const [seen, setSeen] = useState(
+    () => typeof IntersectionObserver === "undefined"
+  );
 
   useEffect(() => {
-    if (disabled) {
-      setRevealed(true);
-      return undefined;
-    }
+    if (disabled || seen) return undefined;
     const node = ref.current;
     if (!node) return undefined;
-
-    if (typeof IntersectionObserver === "undefined") {
-      setRevealed(true);
-      return undefined;
-    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          setRevealed(true);
+          setSeen(true);
           observer.disconnect();
         }
       },
@@ -39,7 +36,8 @@ export default function useReveal({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [threshold, rootMargin, disabled]);
+  }, [threshold, rootMargin, disabled, seen]);
 
-  return [ref, revealed];
+  // `disabled` (reduced motion) means "show everything straight away".
+  return [ref, disabled || seen];
 }
