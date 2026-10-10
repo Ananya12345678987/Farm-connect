@@ -1,0 +1,43 @@
+.nf {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: 72vh;
+  padding-top: calc(var(--nav-h) + 3rem);
+  padding-bottom: var(--sp-16);
+  background: var(--c-ivory);
+}
+
+.nf__contour {
+  opacity: 0.4;
+}
+
+.nf__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.nf__title {
+  margin-top: var(--sp-5);
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  letter-spacing: var(--tr-tight);
+}
+
+.nf__lead {
+  margin: var(--sp-5) auto 0;
+  font-size: var(--fs-lead);
+  color: var(--c-ink-2);
+  max-width: 44ch;
+}
+
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: var(--sp-8);
+}

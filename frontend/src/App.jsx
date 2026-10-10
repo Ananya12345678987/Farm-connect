@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import SiteLayout from "./layouts/SiteLayout";
@@ -11,10 +11,17 @@ import "./App.css";
 /**
  * Routing.
  *
- * Home is imported directly because it is the entry point for almost every
- * visit. Later pages are loaded lazily, so the first load does not carry
- * dashboards and forms the visitor may never open.
+ * Home is imported eagerly because it is the entry point for almost every
+ * visit. Everything else is lazy: the browser downloads a page's code only
+ * when someone navigates to it, and <Suspense> shows RouteFallback meanwhile.
+ *
+ * The catch-all path="*" matches any URL no other route claims, so an unknown
+ * address shows NotFound instead of a blank screen.
  */
+
+const About = lazy(() => import("./pages/About"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
 function App() {
   return (
     <BrowserRouter>
@@ -22,9 +29,10 @@ function App() {
 
       <Suspense fallback={<RouteFallback />}>
         <Routes>
-          {/* Marketing */}
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>
@@ -33,32 +41,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-// function App() {
-//   return (
-//     <main className="u-page u-section">
-//       <p className="u-eyebrow">Farmers and buyers, trading direct</p>
-//       <h1 style={{ fontSize: "var(--fs-h1)", color: "var(--c-forest)" }}>
-//         FarmConnect
-//       </h1>
-//       <p className="u-lead">
-//         List your harvest, source it directly, and skip the extra middle layer.
-//       </p>
-//       <hr className="u-rule" style={{ margin: "var(--sp-8) 0" }} />
-//       <span className="u-chip u-chip--green">Verified farmer</span>{" "}
-//       <span className="u-chip u-chip--amber">Pending</span>
-//     </main>
-//   );
-// }
-
-// export default App;
