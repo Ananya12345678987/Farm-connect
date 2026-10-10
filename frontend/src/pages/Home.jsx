@@ -1,8 +1,11 @@
 import Hero from "../components/Hero/Hero";
 import SectionHeading from "../components/SectionHeading/SectionHeading";
+import ValueStatement from "../sections/ValueStatement";
+import WhyFarmConnect from "../sections/WhyFarmConnect";
+import HowItWorks from "../sections/HowItWorks";
 
+/* Placeholders for sections that arrive in the next commit. */
 const BLOCKS = [
-  { id: "how-it-works", title: "How it works" },
   { id: "for-farmers", title: "For farmers" },
   { id: "for-buyers", title: "For buyers" },
   { id: "get-started", title: "Get started" },
@@ -11,27 +14,17 @@ const BLOCKS = [
 export default function Home() {
   return (
     <>
-    <Hero />
-
-      {/* <section
-        className="u-page"
-        style={{ paddingTop: "calc(var(--nav-h) + 4rem)", minHeight: "90vh" }}
-      >
-        <p className="u-eyebrow">Farmers and buyers, trading direct</p>
-        <h1 style={{ fontSize: "var(--fs-display)", color: "var(--c-forest)" }}>
-          FarmConnect
-        </h1>
-        <Button to="/#how-it-works" size="lg">
-          See how it works
-        </Button>
-      </section> */}
+      <Hero />
+      <ValueStatement />
+      <WhyFarmConnect />
+      <HowItWorks />
 
       {BLOCKS.map((block) => (
         <section
           key={block.id}
           id={block.id}
           className="u-page u-section"
-          style={{ minHeight: "80vh" }}
+          style={{ minHeight: "60vh" }}
         >
           <SectionHeading
             title={block.title}

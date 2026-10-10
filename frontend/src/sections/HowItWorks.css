@@ -1,0 +1,129 @@
+.how {
+  position: relative;
+  background: var(--c-forest-wash);
+}
+
+.how__track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+/* The connector. Sits behind the nodes and is drawn left to right. */
+.how__line {
+  position: absolute;
+  top: 58px;
+  left: 6%;
+  right: 6%;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--c-line-strong) 0 6px,
+    transparent 6px 12px
+  );
+  transform-origin: left;
+  transition: transform 1400ms var(--ease-out), opacity var(--d-slow) var(--ease-out);
+}
+
+.how__line[data-revealed="false"] {
+  transform: scaleX(0);
+}
+
+.how__line[data-revealed="true"] {
+  transform: scaleX(1);
+}
+
+.how__step {
+  position: relative;
+  padding-right: var(--sp-4);
+}
+
+.how__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.7rem + 2vw, 3.25rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: var(--tr-tight);
+  color: var(--c-forest);
+  opacity: 0.22;
+}
+
+.how__node {
+  display: block;
+  width: 13px;
+  height: 13px;
+  margin: var(--sp-5) 0 var(--sp-5);
+  border-radius: 999px;
+  background: var(--c-lime);
+  box-shadow: 0 0 0 5px var(--c-forest-wash), 0 0 0 6px var(--c-line-strong);
+}
+
+.how__step-title {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--tr-snug);
+}
+
+.how__step-body {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-loose);
+  color: var(--c-ink-2);
+  max-width: 32ch;
+}
+
+@media (max-width: 960px) {
+  .how__track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-10) var(--sp-8);
+  }
+  .how__line {
+    display: none;
+  }
+}
+
+/* Below 640px the track becomes a vertical timeline with the connector
+   running down the left edge. */
+@media (max-width: 640px) {
+  .how__track {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .how__step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    grid-template-areas:
+      "num title"
+      "num body";
+    column-gap: var(--sp-4);
+    padding: 0 0 var(--sp-8) 0;
+    border-left: 1px dashed var(--c-line-strong);
+    margin-left: 6px;
+    padding-left: var(--sp-5);
+  }
+
+  .how__step:last-child {
+    border-left-color: transparent;
+    padding-bottom: 0;
+  }
+
+  .how__num {
+    grid-area: num;
+    font-size: 1.5rem;
+    opacity: 0.35;
+  }
+
+  .how__node {
+    position: absolute;
+    left: calc(var(--sp-5) * -1 - 7px);
+    top: 6px;
+    margin: 0;
+    box-shadow: 0 0 0 4px var(--c-forest-wash);
+  }
+
+  .how__step-title { grid-area: title; }
+  .how__step-body { grid-area: body; max-width: none; }
+}

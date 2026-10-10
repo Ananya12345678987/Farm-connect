@@ -1,0 +1,63 @@
+.feature {
+  position: relative;
+  padding-top: var(--sp-6);
+}
+
+.feature__rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--c-line-strong);
+  overflow: hidden;
+}
+
+/* A green segment travels the rule on hover — the contour line being drawn. */
+.feature__rule::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c-forest);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--d-slow) var(--ease-out);
+}
+
+.feature:hover .feature__rule::after {
+  transform: scaleX(1);
+}
+
+.feature__figure {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.5rem + 1.6vw, 2.75rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: var(--tr-tight);
+  color: var(--c-forest);
+  margin-bottom: var(--sp-4);
+}
+
+.feature__figure-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tr-wide);
+  color: var(--c-moss);
+}
+
+.feature__title {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  letter-spacing: var(--tr-snug);
+}
+
+.feature__body {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-loose);
+  color: var(--c-ink-2);
+  max-width: 34ch;
+}
