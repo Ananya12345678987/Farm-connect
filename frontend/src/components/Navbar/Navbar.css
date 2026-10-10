@@ -1,0 +1,249 @@
+/* Floating pill navigation. Glass is used here and in one hero card only —
+   it earns it because the bar genuinely sits over moving content. */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0.85rem var(--gutter) 0;
+  pointer-events: none;
+}
+
+.nav__bar {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  width: 100%;
+  max-width: var(--w-page);
+  min-height: 56px;
+  margin-inline: auto;
+  padding: 0.4rem 0.45rem 0.4rem 1.05rem;
+  border: 1px solid transparent;
+  border-radius: var(--r-chip);
+  background: transparent;
+  transition: background-color var(--d-base) var(--ease-out),
+    border-color var(--d-base) var(--ease-out),
+    box-shadow var(--d-base) var(--ease-out),
+    backdrop-filter var(--d-base) var(--ease-out);
+}
+
+/* Scrolled: the bar condenses into a defined, slightly opaque container. */
+.nav.is-scrolled .nav__bar {
+  background: rgba(250, 247, 240, 0.82);
+  border-color: var(--c-line);
+  box-shadow: var(--e-float);
+}
+
+@supports (backdrop-filter: blur(4px)) {
+  .nav.is-scrolled .nav__bar {
+    background: rgba(250, 247, 240, 0.68);
+    backdrop-filter: blur(14px) saturate(1.25);
+  }
+}
+
+/* ---------- Desktop links ---------- */
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-inline: auto;
+}
+
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--c-ink-2);
+  transition: color var(--d-fast) var(--ease-out);
+}
+
+.nav__link:hover {
+  color: var(--c-ink);
+}
+
+/* A lime underline that grows from the left — the active-state accent. */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.3rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-lime);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--d-base) var(--ease-out);
+}
+
+.nav__link:hover::after {
+  transform: scaleX(0.4);
+}
+
+.nav__link[aria-current="page"] {
+  color: var(--c-ink);
+  font-weight: 560;
+}
+
+.nav__link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Actions ---------- */
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ---------- Mobile toggle ---------- */
+
+.nav__toggle {
+  display: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-chip);
+  color: var(--c-ink);
+  font-size: 1.3rem;
+  background: var(--c-paper);
+  border: 1px solid var(--c-line);
+}
+
+/* ---------- Drawer ---------- */
+
+.nav__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(23, 26, 20, 0.34);
+  pointer-events: auto;
+  animation: nav-scrim var(--d-base) var(--ease-out);
+}
+
+@keyframes nav-scrim {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.nav__drawer {
+  pointer-events: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(360px, 88vw);
+  height: 100dvh;
+  padding: calc(var(--nav-h) + 1.75rem) 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  background: var(--c-ivory);
+  border-left: 1px solid var(--c-line);
+  box-shadow: var(--e-lift);
+  transform: translate3d(100%, 0, 0);
+  visibility: hidden;
+  transition: transform var(--d-base) var(--ease-out),
+    visibility 0s linear var(--d-base);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.nav.is-open .nav__drawer {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  transition: transform var(--d-base) var(--ease-out), visibility 0s;
+}
+
+.nav__drawer-links {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--c-line);
+}
+
+.nav__drawer-link {
+  display: block;
+  /* 58px tall — comfortably above the 44px touch target minimum. */
+  padding: 1.05rem 0.25rem;
+  border-bottom: 1px solid var(--c-line);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 550;
+  letter-spacing: var(--tr-snug);
+  color: var(--c-ink);
+  opacity: 0;
+  transform: translate3d(14px, 0, 0);
+  transition: opacity var(--d-base) var(--ease-out),
+    transform var(--d-base) var(--ease-out),
+    color var(--d-fast) var(--ease-out);
+}
+
+.nav.is-open .nav__drawer-link {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: calc(90ms + var(--i) * 45ms * var(--motion));
+}
+
+.nav__drawer-link[aria-current="page"] {
+  color: var(--c-forest);
+}
+
+.nav__drawer-link[aria-current="page"]::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.6rem;
+  border-radius: 999px;
+  background: var(--c-lime);
+  vertical-align: 0.18em;
+}
+
+.nav__drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (max-width: 960px) {
+  .nav__links,
+  .nav__actions {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: grid;
+    margin-left: auto;
+  }
+
+  .nav__bar {
+    padding-right: 0.4rem;
+  }
+
+  /* On mobile the bar is always defined, because there is no room for it to
+     float ambiguously over the hero. */
+  .nav__bar {
+    background: rgba(250, 247, 240, 0.86);
+    border-color: var(--c-line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__drawer-link {
+    opacity: 1;
+    transform: none;
+  }
+  .nav__scrim {
+    animation: none;
+  }
+}
