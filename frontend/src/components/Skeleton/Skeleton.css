@@ -1,0 +1,58 @@
+.skel {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--c-sand) 0%,
+    var(--c-clay) 40%,
+    var(--c-sand) 80%
+  );
+  background-size: 300% 100%;
+  animation: skel-sweep 1.5s var(--ease-in-out) infinite;
+}
+
+@keyframes skel-sweep {
+  0% { background-position: 120% 0; }
+  100% { background-position: -40% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skel {
+    animation: none;
+    background: var(--c-sand);
+  }
+}
+
+.skel-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skel-card {
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  background: var(--c-paper);
+  padding: 0.6rem;
+}
+
+.skel-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem 0.6rem 0.4rem;
+}
+
+.skel-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.skel-rows__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--c-line);
+}

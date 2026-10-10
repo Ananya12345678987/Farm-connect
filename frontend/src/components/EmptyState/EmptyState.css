@@ -1,0 +1,50 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding: var(--sp-12) var(--sp-6);
+  border: 1px dashed var(--c-line-strong);
+  border-radius: var(--r-card);
+  background: var(--c-ivory);
+}
+
+.empty--sm {
+  padding: var(--sp-8) var(--sp-5);
+}
+
+.empty__mark {
+  width: 64px;
+  color: var(--c-line-strong);
+  margin-bottom: 0.35rem;
+}
+
+.empty__mark svg {
+  width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.empty__seed {
+  fill: var(--c-lime);
+  stroke: none;
+}
+
+.empty__title {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+.empty__body {
+  font-size: var(--fs-sm);
+  color: var(--c-moss);
+  max-width: 38ch;
+  line-height: var(--lh-loose);
+}
+
+.empty__action {
+  margin-top: 0.6rem;
+}

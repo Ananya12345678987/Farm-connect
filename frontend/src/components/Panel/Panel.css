@@ -1,0 +1,218 @@
+.panel {
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-panel);
+  background: var(--c-paper);
+  padding: var(--sp-6);
+  scroll-margin-top: 90px;
+}
+
+.panel--flush {
+  padding: var(--sp-6) 0;
+  border: none;
+  background: transparent;
+  border-radius: 0;
+}
+
+.panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+}
+
+.panel__title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: var(--tr-snug);
+}
+
+.panel__sub {
+  margin-top: 0.1rem;
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+}
+
+.panel__body {
+  min-width: 0;
+}
+
+/* ---------- Shared dashboard building blocks ---------- */
+
+.db-grid {
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.db-grid--stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: var(--sp-5);
+}
+
+.db-grid--split {
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+}
+
+.db-grid--half {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.db-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+/* Metric tile */
+
+.metric {
+  padding: var(--sp-5);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-card);
+  background: var(--c-paper);
+}
+
+.metric__label {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+}
+
+.metric__value {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: var(--tr-tight);
+}
+
+.metric__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.6rem;
+  font-size: var(--fs-2xs);
+  font-weight: 540;
+  color: var(--c-forest);
+}
+
+.metric__delta span {
+  color: var(--c-moss);
+  font-weight: 450;
+}
+
+/* Activity feed */
+
+.feed li {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.feed li:last-child {
+  border-bottom: none;
+}
+
+.feed__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.45rem;
+  border-radius: 999px;
+  background: var(--c-line-strong);
+}
+
+.feed__dot--order,
+.feed__dot--verify { background: var(--c-lime); }
+.feed__dot--payment { background: var(--c-forest); }
+.feed__dot--flag { background: var(--c-rust); }
+.feed__dot--save { background: var(--c-forest-3); }
+.feed__dot--view { background: var(--c-line-strong); }
+.feed__dot--report { background: var(--c-amber); }
+
+.feed__text {
+  font-size: var(--fs-xs);
+  color: var(--c-ink);
+}
+
+.feed__time {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  margin-top: 0.1rem;
+}
+
+/* Quick actions */
+
+.quick {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Mini list of farms / connections */
+
+.minilist li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.minilist li:last-child { border-bottom: none; }
+
+.minilist__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--c-forest-wash);
+  color: var(--c-forest);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+}
+
+.minilist__name {
+  font-size: var(--fs-xs);
+  font-weight: 560;
+}
+
+.minilist__meta {
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+}
+
+.minilist__count {
+  margin-left: auto;
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  white-space: nowrap;
+}
+
+/* Product strip used for recent listings / recently viewed */
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+@media (max-width: 1240px) {
+  .db-grid--stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 980px) {
+  .db-grid--split,
+  .db-grid--half { grid-template-columns: 1fr; }
+  .strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .db-grid--stats { grid-template-columns: 1fr; }
+  .strip { grid-template-columns: 1fr; }
+  .panel { padding: var(--sp-5); }
+}

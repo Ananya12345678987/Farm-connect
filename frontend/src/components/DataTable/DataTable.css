@@ -1,0 +1,114 @@
+.dt {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.dt__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-xs);
+}
+
+.dt__caption {
+  text-align: left;
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  padding-bottom: var(--sp-3);
+}
+
+.dt__table thead th {
+  padding: 0 0.75rem 0.7rem;
+  text-align: left;
+  font-size: var(--fs-2xs);
+  font-weight: 560;
+  color: var(--c-moss);
+  letter-spacing: var(--tr-wide);
+  border-bottom: 1px solid var(--c-line-strong);
+  white-space: nowrap;
+}
+
+.dt__table tbody th,
+.dt__table tbody td {
+  padding: 0.85rem 0.75rem;
+  text-align: left;
+  font-weight: 450;
+  color: var(--c-ink-2);
+  border-bottom: 1px solid var(--c-line);
+  vertical-align: middle;
+}
+
+.dt__table tbody th {
+  font-weight: 560;
+  color: var(--c-ink);
+  white-space: nowrap;
+}
+
+.dt__table tbody tr {
+  transition: background-color var(--d-fast) var(--ease-out);
+}
+
+.dt__table tbody tr:hover {
+  background: var(--c-ivory);
+}
+
+.dt__table tbody tr:last-child th,
+.dt__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ---------- Stacked below 700px ---------- */
+
+@media (max-width: 700px) {
+  .dt {
+    overflow-x: visible;
+  }
+
+  .dt__table,
+  .dt__table tbody,
+  .dt__table tr,
+  .dt__table th,
+  .dt__table td {
+    display: block;
+    width: 100%;
+  }
+
+  .dt__table thead {
+    display: none;
+  }
+
+  .dt__table tbody tr {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--c-line);
+  }
+
+  .dt__table tbody tr:hover {
+    background: transparent;
+  }
+
+  .dt__table tbody th,
+  .dt__table tbody td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    padding: 0.3rem 0;
+    border: none;
+    text-align: right !important;
+    white-space: normal;
+  }
+
+  .dt__table tbody th::before,
+  .dt__table tbody td::before {
+    content: attr(data-label);
+    flex: none;
+    font-size: var(--fs-2xs);
+    font-weight: 500;
+    color: var(--c-moss);
+    text-align: left;
+  }
+
+  .dt__table tbody th {
+    font-size: var(--fs-sm);
+    padding-bottom: 0.5rem;
+  }
+}

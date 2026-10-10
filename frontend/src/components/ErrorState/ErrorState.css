@@ -1,0 +1,41 @@
+.errstate {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  padding: var(--sp-6);
+  border: 1px solid #e8d2cb;
+  border-radius: var(--r-card);
+  background: var(--c-rust-wash);
+}
+
+.errstate__mark {
+  width: 26px;
+  color: var(--c-rust);
+  flex: none;
+}
+
+.errstate__mark svg {
+  width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+
+.errstate__copy {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.errstate__title {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: #7c3320;
+}
+
+.errstate__body {
+  font-size: var(--fs-sm);
+  color: #8a4a36;
+  margin-top: 0.15rem;
+}
