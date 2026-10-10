@@ -23,6 +23,12 @@ import "./App.css";
 const About = lazy(() => import("./pages/About"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Login = lazy(() => import("./pages/Login"));
+const FarmerRegister = lazy(() => import("./pages/FarmerRegister"));
+const BuyerRegister = lazy(() => import("./pages/BuyerRegister"));
+const AdminRegister = lazy(() => import("./pages/AdminRegister"));
+
+
+
 
 function App() {
   return (
@@ -40,6 +46,10 @@ function App() {
           {/* Auth pages bring their own chrome */}
           <Route element={<PlainLayout />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/farmer-register" element={<FarmerRegister />} />
+            <Route path="/buyer-register" element={<BuyerRegister />} />
+            <Route path="/admin-register" element={<AdminRegister />} />
+          
           </Route>
         </Routes>
       </Suspense>

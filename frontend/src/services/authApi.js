@@ -23,4 +23,21 @@ export async function login({ email }) {
       : "BUYER";
 
   return { user: { email, role } };
+} 
+
+
+
+export async function registerFarmer(values) {
+  await wait(700);
+  return { user: { email: values.email, role: "FARMER" } };
+}
+
+export async function registerBuyer(values) {
+  await wait(700);
+  return { user: { email: values.email, role: "BUYER" } };
+}
+
+export async function registerAdmin(values) {
+  await wait(700);
+  return { user: { email: values.email, role: "ADMIN" } };
 }
