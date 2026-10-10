@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import SiteLayout from "./layouts/SiteLayout";
+import PlainLayout from "./layouts/PlainLayout";
 import ScrollManager from "./components/PageTransition/ScrollManager";
 import RouteFallback from "./components/RouteFallback/RouteFallback";
 
@@ -21,6 +22,7 @@ import "./App.css";
 
 const About = lazy(() => import("./pages/About"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Login = lazy(() => import("./pages/Login"));
 
 function App() {
   return (
@@ -33,6 +35,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
+          </Route>
+
+          {/* Auth pages bring their own chrome */}
+          <Route element={<PlainLayout />}>
+            <Route path="/login" element={<Login />} />
           </Route>
         </Routes>
       </Suspense>

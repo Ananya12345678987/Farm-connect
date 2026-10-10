@@ -1,0 +1,263 @@
+.auth {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  min-height: 100dvh;
+  background: var(--c-ivory);
+}
+
+.auth__form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-8) var(--gutter);
+}
+
+.auth__form-inner {
+  width: 100%;
+  max-width: 30rem;
+}
+
+.auth__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-12);
+}
+
+.auth__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--r-chip);
+  font-size: var(--fs-xs);
+  color: var(--c-moss);
+  transition: color var(--d-fast) var(--ease-out),
+    background-color var(--d-fast) var(--ease-out);
+}
+
+.auth__back:hover {
+  color: var(--c-ink);
+  background: var(--c-sand);
+}
+
+.auth__title {
+  font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: var(--tr-tight);
+  max-width: 18ch;
+}
+
+.auth__lead {
+  margin-top: var(--sp-3);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-loose);
+  color: var(--c-ink-2);
+  max-width: 46ch;
+}
+
+.auth__footer {
+  margin-top: var(--sp-6);
+  font-size: var(--fs-xs);
+  color: var(--c-moss);
+}
+
+.auth__footer a {
+  font-weight: 560;
+  color: var(--c-forest);
+  border-bottom: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.auth__footer a:hover {
+  color: var(--c-ink);
+}
+
+/* ---------- Success ---------- */
+
+.auth__success-mark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: var(--sp-5);
+  border-radius: 999px;
+  background: var(--c-lime);
+  color: #1a2708;
+  font-size: 1.3rem;
+}
+
+.auth__success-cta {
+  margin-top: var(--sp-8);
+}
+
+.auth__success {
+  animation: auth-success 320ms var(--ease-out);
+}
+
+@keyframes auth-success {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+}
+
+/* ---------- Panel ---------- */
+
+.auth__panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--c-forest);
+}
+
+.auth__panel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth__panel-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, rgba(15, 59, 42, 0.5), rgba(10, 24, 17, 0.92));
+}
+
+.auth__panel-contour {
+  opacity: 0.45;
+}
+
+.auth__panel-copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  color: var(--c-ivory);
+}
+
+.auth__panel-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: var(--tr-snug);
+  max-width: 18ch;
+}
+
+.auth__panel-list {
+  margin-top: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 34ch;
+}
+
+.auth__panel-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: rgba(250, 247, 240, 0.8);
+}
+
+.auth__panel-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--c-lime);
+}
+
+/* ---------- Form building blocks shared by the auth pages ---------- */
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin-top: var(--sp-8);
+}
+
+.auth__actions {
+  margin-top: var(--sp-2);
+}
+
+.auth__aside-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+.auth__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-2);
+  cursor: pointer;
+}
+
+.auth__check input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--c-forest);
+  cursor: pointer;
+}
+
+.auth__minor-link {
+  font-size: var(--fs-xs);
+  color: var(--c-forest);
+  font-weight: 540;
+  border-radius: 4px;
+}
+
+.auth__minor-link:hover {
+  text-decoration: underline;
+}
+
+.auth__alert {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: var(--r-input);
+  border: 1px solid #e8d2cb;
+  background: var(--c-rust-wash);
+  font-size: var(--fs-xs);
+  color: #7c3320;
+}
+
+@media (max-width: 900px) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  /* The photo panel moves above the form and becomes a short band rather
+     than disappearing — it is the only brand image on the page. */
+  .auth__panel {
+    order: -1;
+    min-height: 190px;
+  }
+
+  .auth__panel-copy {
+    padding: var(--sp-6) var(--gutter);
+  }
+
+  .auth__panel-list {
+    display: none;
+  }
+
+  .auth__form-side {
+    padding-block: var(--sp-10);
+  }
+
+  .auth__head {
+    margin-bottom: var(--sp-8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth__success { animation: none; }
+}
