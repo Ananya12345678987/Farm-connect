@@ -1,0 +1,246 @@
+/* ------------------------------------------------------------
+   The plant rig.
+   Depth comes from translateZ inside a preserve-3d parent, so the
+   pointer rotation applied by the hero produces true parallax.
+   ------------------------------------------------------------ */
+
+.plant {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  /* --px / --py are written by the hero's pointer-parallax hook. */
+  perspective: 900px;
+  perspective-origin: 50% 62%;
+}
+
+.plant__rig {
+  position: relative;
+  width: 240px;
+  height: 300px;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--px, 0) * 13deg * var(--motion)))
+    rotateX(calc(var(--py, 0) * -8deg * var(--motion)))
+    translate3d(0, calc(var(--sy, 0) * 34px), 0);
+  transition: transform 420ms var(--ease-soft);
+  cursor: pointer;
+  border-radius: var(--r-panel);
+}
+
+.plant__rig:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+/* Hover opens the canopy very slightly — the plant reacting, not animating. */
+.plant__rig:hover .plant__leaf {
+  --hover-spread: 1;
+}
+
+.plant__rig.is-pulsing .plant__stem-path {
+  animation: plant-pulse 650ms var(--ease-out);
+}
+
+@keyframes plant-pulse {
+  0% { stroke-width: 7; }
+  40% { stroke-width: 10.5; }
+  100% { stroke-width: 7; }
+}
+
+/* ---------- Soil ---------- */
+
+.plant__soil {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 240px;
+  transform: translate3d(-50%, 0, -10px);
+}
+
+.plant__soil svg { width: 100%; }
+
+.plant__soil-fill {
+  fill: rgba(90, 74, 50, 0.09);
+}
+
+.plant__soil-line {
+  fill: none;
+  stroke: rgba(90, 74, 50, 0.28);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+/* ---------- Stem ---------- */
+
+.plant__stem {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  width: 60px;
+  height: 260px;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.plant__stem svg { width: 100%; height: 100%; overflow: visible; }
+
+.plant__stem-path {
+  fill: none;
+  stroke: var(--c-forest-2);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  transition: stroke-dashoffset 900ms var(--ease-out),
+    stroke-width 200ms var(--ease-out);
+}
+
+/* ---------- Leaves ---------- */
+
+.plant__leaf {
+  position: absolute;
+  left: 50%;
+  bottom: 150px;
+  width: 120px;
+  height: 64px;
+  margin-left: -60px;
+  transform-origin: 50% 90%;
+  transform: translate3d(
+      calc(var(--lx) * (1 + var(--hover-spread, 0) * 0.07)),
+      calc(var(--ly) * (1 + var(--hover-spread, 0) * 0.04)),
+      var(--lz)
+    )
+    rotate(var(--lrot)) scale(var(--lscale));
+  transition: transform 520ms var(--ease-soft), opacity 520ms var(--ease-out);
+  animation: leaf-unfurl 760ms var(--ease-out) backwards;
+}
+
+@keyframes leaf-unfurl {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, var(--lz)) rotate(calc(var(--lrot) * 0.25))
+      scale(calc(var(--lscale) * 0.3));
+  }
+}
+
+/* The sway lives on an inner element so it never fights the positioning
+   transform on the parent. */
+.plant__leaf-sway {
+  display: block;
+  width: 100%;
+  transform-origin: 6% 88%;
+  animation: leaf-sway var(--ldur) var(--ease-in-out) var(--ldelay) infinite;
+}
+
+@keyframes leaf-sway {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(var(--lsway)) translateY(-4px); }
+}
+
+.plant__leaf svg { width: 100%; overflow: visible; }
+
+.plant__leaf-blade {
+  fill: var(--c-forest-3);
+}
+
+/* Front leaves catch more light; depth is read from colour as well as size. */
+.plant__leaf:nth-child(odd) .plant__leaf-blade { fill: var(--c-forest-2); }
+
+.plant__leaf-vein {
+  fill: none;
+  stroke: rgba(250, 247, 240, 0.5);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.plant__leaf-vein--minor {
+  stroke-width: 1.4;
+  opacity: 0.55;
+}
+
+/* ---------- Motes ---------- */
+
+.plant__mote {
+  position: absolute;
+  left: 50%;
+  bottom: 150px;
+  width: var(--msize);
+  height: var(--msize);
+  border-radius: 999px;
+  background: var(--c-lime);
+  box-shadow: 0 0 10px rgba(198, 242, 78, 0.65);
+  opacity: 0.7;
+  transform: translate3d(var(--mx), var(--my), var(--mz));
+  animation: mote-drift var(--mdur) var(--ease-in-out) var(--mdelay) infinite;
+  pointer-events: none;
+}
+
+@keyframes mote-drift {
+  0%, 100% {
+    transform: translate3d(var(--mx), var(--my), var(--mz));
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate3d(
+      calc(var(--mx) + 14px),
+      calc(var(--my) - 26px),
+      var(--mz)
+    );
+    opacity: 0.8;
+  }
+}
+
+/* ---------- Hint ---------- */
+
+.plant__hint {
+  position: absolute;
+  bottom: -4px;
+  font-size: var(--fs-2xs);
+  color: var(--c-moss);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity var(--d-base) var(--ease-out),
+    transform var(--d-base) var(--ease-out);
+  pointer-events: none;
+}
+
+.plant:hover .plant__hint,
+.plant__rig:focus-visible ~ .plant__hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 900px) {
+  .plant__rig {
+    width: 200px;
+    height: 250px;
+    transform: none;
+  }
+  .plant__stem { height: 216px; }
+  .plant__leaf { bottom: 122px; }
+  .plant__hint { opacity: 1; transform: none; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .plant__rig {
+    transform: none;
+    transition: none;
+  }
+  .plant__leaf {
+    animation: none;
+  }
+  .plant__leaf-sway {
+    animation: none;
+  }
+  .plant__stem-path {
+    transition: none;
+  }
+  .plant__hint {
+    opacity: 1;
+    transform: none;
+  }
+}

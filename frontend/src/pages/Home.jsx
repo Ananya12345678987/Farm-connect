@@ -1,3 +1,5 @@
+import ContourField from "../components/ContourField/ContourField";
+import PlantScene from "../components/Hero/PlantScene";
 import SectionHeading from "../components/SectionHeading/SectionHeading";
 import Button from "../components/Button/Button";
 
@@ -11,6 +13,8 @@ const BLOCKS = [
 export default function Home() {
   return (
     <>
+
+
       <section
         className="u-page"
         style={{ paddingTop: "calc(var(--nav-h) + 4rem)", minHeight: "90vh" }}
