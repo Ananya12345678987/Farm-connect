@@ -5,6 +5,7 @@ import SiteLayout from "./layouts/SiteLayout";
 import PlainLayout from "./layouts/PlainLayout";
 import ScrollManager from "./components/PageTransition/ScrollManager";
 import RouteFallback from "./components/RouteFallback/RouteFallback";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 import Home from "./pages/Home";
 import "./App.css";
@@ -26,7 +27,7 @@ const Login = lazy(() => import("./pages/Login"));
 const FarmerRegister = lazy(() => import("./pages/FarmerRegister"));
 const BuyerRegister = lazy(() => import("./pages/BuyerRegister"));
 const AdminRegister = lazy(() => import("./pages/AdminRegister"));
-
+const FarmerDashboard = lazy(() => import("./pages/FarmerDashboard"));
 
 
 
@@ -51,6 +52,11 @@ function App() {
             <Route path="/admin-register" element={<AdminRegister />} />
           
           </Route>
+                    {/* Product — the three dashboards share one frame */}
+          <Route element={<DashboardLayout />}>
+            <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
+          </Route>
+
         </Routes>
       </Suspense>
     </BrowserRouter>
