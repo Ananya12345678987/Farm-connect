@@ -15,6 +15,7 @@
   "dependencies": {
     "dotenv": "^18.0.7",
     "express": "^5.3.0",
-    "exxpress": "^1.0.0"
+    "exxpress": "^1.0.0",
+    "mongoose": "^9.11.2"
   }
 }
