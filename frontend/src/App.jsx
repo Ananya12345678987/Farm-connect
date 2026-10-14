@@ -28,7 +28,7 @@ const FarmerRegister = lazy(() => import("./pages/FarmerRegister"));
 const BuyerRegister = lazy(() => import("./pages/BuyerRegister"));
 const AdminRegister = lazy(() => import("./pages/AdminRegister"));
 const FarmerDashboard = lazy(() => import("./pages/FarmerDashboard"));
-
+const BuyerDashboard = lazy(() => import("./pages/BuyerDashboard"));
 
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
             <Route path="/farmer-register" element={<FarmerRegister />} />
             <Route path="/buyer-register" element={<BuyerRegister />} />
             <Route path="/admin-register" element={<AdminRegister />} />
-          
+            <Route path="/buyer-dashboard" element={<BuyerDashboard />} />
           </Route>
                     {/* Product — the three dashboards share one frame */}
           <Route element={<DashboardLayout />}>
