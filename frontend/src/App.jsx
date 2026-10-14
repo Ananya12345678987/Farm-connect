@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import SiteLayout from "./layouts/SiteLayout";
 import PlainLayout from "./layouts/PlainLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 import ScrollManager from "./components/PageTransition/ScrollManager";
 import RouteFallback from "./components/RouteFallback/RouteFallback";
-import DashboardLayout from "./layouts/DashboardLayout";
 
 import Home from "./pages/Home";
 import "./App.css";
@@ -30,7 +30,6 @@ const AdminRegister = lazy(() => import("./pages/AdminRegister"));
 const FarmerDashboard = lazy(() => import("./pages/FarmerDashboard"));
 const BuyerDashboard = lazy(() => import("./pages/BuyerDashboard"));
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -38,6 +37,7 @@ function App() {
 
       <Suspense fallback={<RouteFallback />}>
         <Routes>
+          {/* Marketing */}
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -50,13 +50,13 @@ function App() {
             <Route path="/farmer-register" element={<FarmerRegister />} />
             <Route path="/buyer-register" element={<BuyerRegister />} />
             <Route path="/admin-register" element={<AdminRegister />} />
-            <Route path="/buyer-dashboard" element={<BuyerDashboard />} />
-          </Route>
-                    {/* Product — the three dashboards share one frame */}
-          <Route element={<DashboardLayout />}>
-            <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
           </Route>
 
+          {/* Product — the dashboards share one frame */}
+          <Route element={<DashboardLayout />}>
+            <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
+            <Route path="/buyer-dashboard" element={<BuyerDashboard />} />
+          </Route>
         </Routes>
       </Suspense>
     </BrowserRouter>
