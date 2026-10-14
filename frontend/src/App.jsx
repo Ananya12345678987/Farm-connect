@@ -29,6 +29,7 @@ const BuyerRegister = lazy(() => import("./pages/BuyerRegister"));
 const AdminRegister = lazy(() => import("./pages/AdminRegister"));
 const FarmerDashboard = lazy(() => import("./pages/FarmerDashboard"));
 const BuyerDashboard = lazy(() => import("./pages/BuyerDashboard"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
             <Route path="/buyer-dashboard" element={<BuyerDashboard />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
           </Route>
         </Routes>
       </Suspense>
