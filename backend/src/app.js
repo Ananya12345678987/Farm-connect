@@ -2,6 +2,7 @@ import express from "express";
 
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import { ok } from "./utils/ApiResponse.js";
+import apiRoutes from "./routes/index.js";
 
 /**
  * The Express app, kept separate from the HTTP server (server.js) so that
@@ -15,7 +16,7 @@ app.disable("x-powered-by");
    as multipart and are capped separately by the upload middleware. */
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true, limit: "100kb" }));
-
+app.use("/api", apiRoutes);
 /** GET /api/health: a quick way to see that the API is up. */
 app.get("/api/health", (_req, res) =>
   ok(res, {
