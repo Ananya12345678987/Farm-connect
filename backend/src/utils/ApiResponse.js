@@ -1,7 +1,7 @@
 /**
- * The response shapes the whole API uses. Nothing writes res.json directly,
- * which is what keeps the frontend's loading/success/empty/error handling
- * uniform across every endpoint.
+ * The two response shapes the whole API uses. Nothing writes res.json
+ * directly, which is what keeps the frontend's loading/success/empty/error
+ * handling uniform across every endpoint.
  */
 
 export const ok = (res, { message = "OK", data = null, status = 200, meta } = {}) => {
