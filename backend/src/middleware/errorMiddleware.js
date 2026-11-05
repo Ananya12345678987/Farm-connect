@@ -40,8 +40,6 @@ export const errorHandler = (err, req, res, _next) => {
       error = ApiError.unauthorized("Your session has expired, log in again", "TOKEN_EXPIRED");
     } else if (error?.type === "entity.too.large") {
       error = ApiError.badRequest("Request body is too large", "PAYLOAD_TOO_LARGE");
-    } else if (error?.type === "entity.parse.failed") {
-      error = ApiError.badRequest("Request body is not valid JSON", "INVALID_JSON");
     } else {
       logger.error("Unhandled error", {
         message: error?.message,
