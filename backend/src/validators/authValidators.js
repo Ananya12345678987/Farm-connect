@@ -12,7 +12,10 @@ export const farmerRegisterSchema = z.object({
   password,
   farmName: z.string().trim().min(2, "Enter your farm name").max(120),
   location: z.string().trim().min(2, "Enter your location").max(160),
-  farmType: z.enum(FARM_TYPES).optional().default("MIXED"),
+  farmType: z.preprocess(
+  (v) => (typeof v === "string" && v.trim() ? v.trim().toUpperCase() : undefined),
+  z.enum(FARM_TYPES).optional().default("MIXED")
+),
   state: shortText(80).optional(),
   district: shortText(80).optional(),
   pincode: z.string().trim().regex(/^[1-9]\d{5}$/).optional(),
